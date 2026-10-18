@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pour Mazarine 💖</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose-clair: #fff0f5;
+    --rose: #ff8fb1;
+    --rose-vif: #ff5c8a;
+    --rose-fonce: #c2185b;
+    --creme: #fffafc;
+    --texte: #5a2a3c;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Quicksand', sans-serif;
+    color: var(--texte);
+    background: linear-gradient(180deg, var(--rose-clair), #ffe0ec 50%, var(--rose-clair));
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  h1, h2 { font-family: 'Dancing Script', cursive; color: var(--rose-fonce); }
+  section { max-width: 800px; margin: 0 auto; padding: 80px 24px; text-align: center; }
+  h2 { font-size: clamp(2.2rem, 6vw, 3rem); margin-bottom: 24px; }
+
+  /* Cœurs flottants */
+  #coeurs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .coeur {
+    position: absolute; bottom: -40px; opacity: 0;
+    animation: monter linear forwards;
+  }
+  @keyframes monter {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    10% { opacity: .8; }
+    100% { transform: translateY(-110vh) rotate(40deg); opacity: 0; }
+  }
+  main, header { position: relative; z-index: 1; }
+
+  /* Accueil */
+  header {
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center; padding: 24px;
+  }
+  header h1 { font-size: clamp(3rem, 12vw, 6rem); line-height: 1.1; }
+  header p { font-size: 1.2rem; margin: 16px 0 32px; max-width: 480px; }
+  .grand-coeur { font-size: 4rem; animation: battement 1.2s infinite; display: inline-block; }
+  @keyframes battement { 0%,100% { transform: scale(1); } 25% { transform: scale(1.2); } 50% { transform: scale(1); } 75% { transform: scale(1.15); } }
+  .bouton {
+    background: linear-gradient(135deg, var(--rose), var(--rose-vif));
+    color: white; border: none; padding: 14px 32px; border-radius: 50px;
+    font: 600 1.05rem 'Quicksand', sans-serif; cursor: pointer;
+    box-shadow: 0 8px 20px rgba(255, 92, 138, .35);
+    transition: transform .2s, box-shadow .2s; text-decoration: none; display: inline-block;
+  }
+  .bouton:hover { transform: translateY(-3px); box-shadow: 0 12px 26px rgba(255, 92, 138, .45); }
+
+  /* Cartes */
+  .carte {
+    background: var(--creme); border-radius: 24px; padding: 32px;
+    box-shadow: 0 10px 30px rgba(194, 24, 91, .12);
+    border: 2px solid #ffd0e0;
+  }
+  .lettre { text-align: left; font-size: 1.1rem; }
+  .lettre p { margin-bottom: 16px; }
+  .signature { font-family: 'Dancing Script', cursive; font-size: 1.8rem; color: var(--rose-fonce); text-align: right; }
+
+  /* Raisons */
+  .grille { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 20px; }
+  .raison { transition: transform .25s; }
+  .raison:hover { transform: translateY(-6px) rotate(-1deg); }
+  .raison .emoji { font-size: 2.6rem; display: block; margin-bottom: 8px; }
+  .raison h3 { color: var(--rose-fonce); margin-bottom: 6px; }
+
+  /* Citation haïtienne */
+  .haiti { background: linear-gradient(135deg, #ffe0ec, #ffd0e0); border-radius: 24px; padding: 36px 24px; }
+  .haiti .creole { font-family: 'Dancing Script', cursive; font-size: 2rem; color: var(--rose-fonce); }
+  .haiti small { display: block; margin-top: 8px; opacity: .8; }
+
+  /* Compteur */
+  .compteur { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+  .compteur div {
+    background: var(--creme); border: 2px solid #ffd0e0; border-radius: 18px;
+    padding: 14px 18px; min-width: 84px;
+  }
+  .compteur strong { display: block; font-size: 1.9rem; color: var(--rose-vif); }
+
+  /* Message surprise */
+  #surprise {
+    margin-top: 28px; font-family: 'Dancing Script', cursive; font-size: 2rem;
+    color: var(--rose-fonce); min-height: 3em; opacity: 0; transition: opacity .8s;
+  }
+  #surprise.visible { opacity: 1; }
+
+  /* Musique */
+  .note { display: inline-block; animation: danse 2s ease-in-out infinite; font-size: 2.2rem; }
+  .note:nth-child(2) { animation-delay: .3s; } .note:nth-child(3) { animation-delay: .6s; }
+  @keyframes danse { 0%,100% { transform: translateY(0) rotate(-8deg); } 50% { transform: translateY(-12px) rotate(8deg); } }
+
+  footer { text-align: center; padding: 40px 24px 60px; position: relative; z-index: 1; font-family: 'Dancing Script', cursive; font-size: 1.6rem; color: var(--rose-fonce); }
+
+  /* Apparition au scroll */
+  .apparait { opacity: 0; transform: translateY(30px); transition: opacity .8s, transform .8s; }
+  .apparait.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<div id="coeurs"></div>
+
+<header>
+  <div class="grand-coeur">💖</div>
+  <h1>Mazarine</h1>
+  <p>J'ai fait ce petit coin d'internet rien que pour toi, pour te dire à quel point je t'aime.</p>
+  <a href="#lettre" class="bouton">Découvre 💌</a>
+</header>
+
+<main>
+
+  <!-- LETTRE -->
+  <section id="lettre" class="apparait">
+    <h2>Ma lettre pour toi</h2>
+    <div class="carte lettre">
+      <p>Ma Mazarine,</p>
+      <p>Depuis que tu es dans ma vie, tout est plus doux, plus lumineux et plus beau. Ton sourire me fait oublier mes soucis, et ta voix est ma mélodie préférée.</p>
+      <p>Tu as un cœur immense : la façon dont tu prends soin des enfants, ta patience, ta tendresse, ta joie… tout ça me rappelle chaque jour la chance que j'ai de t'avoir à mes côtés.</p>
+      <p>Merci d'être celle que tu es. Je t'aime plus que les mots ne pourront jamais le dire.</p>
+      <p class="signature">Pour toujours à toi 💕</p>
+    </div>
+  </section>
+
+  <!-- RAISONS -->
+  <section class="apparait">
+    <h2>Pourquoi je t'aime</h2>
+    <div class="grille">
+      <div class="carte raison"><span class="emoji">🎶</span><h3>Ta musique</h3><p>Tu mets de la mélodie dans ma vie, et ton amour de la musique me fait vibrer.</p></div>
+      <div class="carte raison"><span class="emoji">🧸</span><h3>Ta tendresse</h3><p>Avec les enfants, tu es patiente, douce et lumineuse. Ils ont de la chance de t'avoir.</p></div>
+      <div class="carte raison"><span class="emoji">🌹</span><h3>Ton romantisme</h3><p>Tu sais rendre les petits moments magiques, et c'est ce qui me fait craquer.</p></div>
+      <div class="carte raison"><span class="emoji">🌸</span><h3>Ta beauté</h3><p>Dehors comme dedans, tu rayonnes. Tout simplement.</p></div>
+    </div>
+  </section>
+
+  <!-- HAÏTI -->
+  <section class="apparait">
+    <div class="haiti">
+      <h2>Nos racines 🇭🇹</h2>
+      <p class="creole">Mwen renmen w, Mazarine.</p>
+      <small>(« Je t'aime, Mazarine » en kreyòl)</small>
+      <p style="margin-top:18px;">Nous partageons la même belle culture, la même histoire et la même fierté. Avec toi, je me sens chez moi.</p>
+    </div>
+  </section>
+
+  <!-- COMPTEUR -->
+  <section class="apparait">
+    <h2>Notre histoire</h2>
+    <p>Depuis le jour où nous sommes ensemble, nous avons déjà partagé…</p>
+    <div class="compteur" id="compteur">
+      <div><strong id="jours">0</strong>jours</div>
+      <div><strong id="heures">0</strong>heures</div>
+      <div><strong id="minutes">0</strong>minutes</div>
+      <div><strong id="secondes">0</strong>secondes</div>
+    </div>
+    <p style="margin-top:16px;">…de bonheur ensemble 💞</p>
+  </section>
+
+  <!-- MUSIQUE -->
+  <section class="apparait">
+    <div><span class="note">🎵</span><span class="note">🎶</span><span class="note">🎵</span></div>
+    <h2>Une chanson pour nous</h2>
+    <p>Mets ta chanson préférée, ferme les yeux, et pense à moi pendant que je pense à toi 💗</p>
+    <!-- 👉 Tu peux ajouter ici un lecteur YouTube ou Spotify (voir README) -->
+  </section>
+
+  <!-- SURPRISE -->
+  <section class="apparait">
+    <h2>Une dernière surprise</h2>
+    <button class="bouton" id="btnSurprise">Clique ici 💝</button>
+    <div id="surprise"></div>
+  </section>
+
+</main>
+
+<footer>Fait avec tout mon amour, pour toi 💖</footer>
+
+<script>
+  // ====== À PERSONNALISER ======
+  // Date de début de votre histoire (année, mois-1, jour)
+  const DEBUT = new Date(2025, 0, 1);
+
+  const messages = [
+    "Tu es la plus belle chose qui me soit arrivée 🌸",
+    "Je t'aime plus qu'hier, et moins que demain 💕",
+    "Mazarine, tu es mon plus beau chapitre 📖",
+    "Avec toi, chaque jour est une chanson d'amour 🎶",
+    "Mwen renmen w anpil, kè mwen 💖"
+  ];
+  // =============================
+
+  // Cœurs flottants
+  const zone = document.getElementById('coeurs');
+  const formes = ['💖','💗','💕','🌸','💓','🎀'];
+  function creerCoeur() {
+    const c = document.createElement('span');
+    c.className = 'coeur';
+    c.textContent = formes[Math.floor(Math.random() * formes.length)];
+    c.style.left = Math.random() * 100 + 'vw';
+    c.style.fontSize = (14 + Math.random() * 22) + 'px';
+    c.style.animationDuration = (7 + Math.random() * 7) + 's';
+    zone.appendChild(c);
+    setTimeout(() => c.remove(), 15000);
+  }
+  setInterval(creerCoeur, 700);
+
+  // Apparition au scroll
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: .15 });
+  document.querySelectorAll('.apparait').forEach(el => obs.observe(el));
+
+  // Compteur
+  function majCompteur() {
+    const diff = Math.max(0, Date.now() - DEBUT.getTime());
+    document.getElementById('jours').textContent = Math.floor(diff / 86400000);
+    document.getElementById('heures').textContent = Math.floor(diff / 3600000) % 24;
+    document.getElementById('minutes').textContent = Math.floor(diff / 60000) % 60;
+    document.getElementById('secondes').textContent = Math.floor(diff / 1000) % 60;
+  }
+  majCompteur();
+  setInterval(majCompteur, 1000);
+
+  // Surprise
+  let i = 0;
+  const sur = document.getElementById('surprise');
+  document.getElementById('btnSurprise').addEventListener('click', () => {
+    sur.classList.remove('visible');
+    setTimeout(() => {
+      sur.textContent = messages[i % messages.length];
+      sur.classList.add('visible');
+      i++;
+    }, 250);
+    for (let k = 0; k < 15; k++) setTimeout(creerCoeur, k * 60);
+  });
+</script>
+</body>
+</html>
